@@ -72,9 +72,11 @@ td {
 }
 
 .letterDivInf {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: Helvetica, sans-serif;
     font-weight: bold;
     font-size: 48px;
+    margin: 5px;
+
 }
 
 .autoConv {
@@ -83,6 +85,7 @@ td {
     border-radius: 7px;
     margin:  5px;
     border:  2px solid #BBB;
+    //box-shadow: 0px 5px #BBB;
 
 }
 
@@ -99,48 +102,52 @@ td {
 
 }
 
-.title {
-
+.autoConv .title {
     font-family: 'VT323';
     font-size: 12px;
     color: #fff;
     border-radius: 5px 5px 0 0;
     padding:  2px 5px;
     background-color: #BBB;
-
 }
 
-.action {
-
+.autoConv .action {
     display: flex;
-
 }
 
-.add {
-
+.autoConv .add {
     border-radius: 0 0 0 5px;
     border-right:  2px solid #BBB;
 }
 
-.max {
-
+.autoConv .max {
     border-radius: 0 0 5px 0;
     border-left:  2px solid #BBB;
-
 }
 
-.level {
-
+.autoConv .level {
     font-size: 20px;
     flex-grow: 1;
     padding: 3px 10px;
-
+    color:  #333;
 }
 
 
 .countDiv {
     font-family: VT323;
-    font-size: 22px;
+    font-size: 24px;
+    color:  #333;
+}
+
+.countDiv .change {
+
+    background-color: #BBB;
+    color: #FFF;
+    padding: 2px;
+    margin-left: 5px;
+    border-radius: 5px;
+    font-size: 15px;
+
 }
 
 .letterBoxDiv {
@@ -154,25 +161,60 @@ td {
     position: relative;
     color:  #333;
     border-width: 3px;
-    box-shadow: 0px 10px #f54242;
     border-style: solid;
-    border-color: #f54242;
     border-radius: 15px;
     cursor: pointer;
+    box-shadow: 0px 10px;
+
+}
+
+.letterBoxDiv.letter-A,
+.letterBoxDiv.letter-B,
+.letterBoxDiv.letter-C,
+.letterBoxDiv.letter-D,
+.letterBoxDiv.letter-E {
+
+    
+    color: #f54242;
+    border-color: #f54242;
+
+}
+
+.letterBoxDiv.letter-F,
+.letterBoxDiv.letter-G,
+.letterBoxDiv.letter-H,
+.letterBoxDiv.letter-I,
+.letterBoxDiv.letter-J {
+
+    
+    color: #4287f5;
+    border-color: #4287f5;
+
+}
+
+.letterBoxDiv.letter-K,
+.letterBoxDiv.letter-L,
+.letterBoxDiv.letter-M,
+.letterBoxDiv.letter-N,
+.letterBoxDiv.letter-O {
+
+    
+    color: #00d162;
+    border-color: #00d162;
 
 }
 
 .letterBoxDiv:hover{
 
  transform: translateY(-5px);
- box-shadow: 0px 15px #f54242;
+ box-shadow: 0px 15px;
 
 }
 
 
 .letterBoxDiv:active{
 
- box-shadow: 0px 5px #f54242;
+ box-shadow: 0px 5px;
  transform: translateY(5px);
 
 }
@@ -189,17 +231,7 @@ td {
     cursor: pointer;
 }
 
-.centerDiv{
-    align-content: center;
-    text-align: center;
-}
 
-.pauseButton {
-    width: 15px;
-    height: 15px;
-    font-size: 14px;
-    display: inline-block;
-}
 
 .optionsButton {
     position: absolute;
@@ -285,6 +317,13 @@ td {
     padding:  3px 7px;
     border-radius: 100px;
     border:  2px solid #BBB;
+
+}
+
+.tooltip {
+
+    font-family: 'VT323';
+    font-size: 16px !important;
 
 }
 

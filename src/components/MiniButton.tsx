@@ -19,7 +19,7 @@ export class MiniButton extends React.Component<MiniButtonProps, undefined> {
     }
     render() {
         const dcolor = this.props.disabledColor ? this.props.disabledColor : 'gray';
-        const ncolor = this.props.normalColor ? this.props.normalColor : 'black';
+        const ncolor = this.props.normalColor ? this.props.normalColor : '#333';
         let textColor = this.props.disabled ? dcolor : ncolor;
         let style: any = {
             color: textColor

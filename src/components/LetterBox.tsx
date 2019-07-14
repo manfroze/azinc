@@ -106,7 +106,7 @@ export class LetterBox extends React.Component<LetterBoxProps, undefined> {
             
 
             return (
-                <div className={"letterBoxDiv" + addStyle} onClick={() => this.props.onClick(this.props.idx)}>
+                <div className={"letterBoxDiv" + addStyle + " letter-" + this.props.sym} onClick={() => this.props.onClick(this.props.idx)}>
 
                     <MiniButton className="pause" borderless={true} onClick={() => this.props.onPauseClick(this.props.idx)}>
                             <span className="smallText" {...ttPause}><i className="material-icons">{pauseButtonSym}</i></span>
@@ -120,11 +120,15 @@ export class LetterBox extends React.Component<LetterBoxProps, undefined> {
                         {this.props.sym}
                     </div>
 
-                    <div className="autoConv">
+                    <div className="countDiv">
+                        <span className="count" {...ttCount}>{count}</span>
+                        <span className="change" {...ttChange}>{change}</span>
+                    </div>
 
-                    <div className="title">
-                    <span className="auto">AUTOCONV </span>
-                    <span className="mult">[10→{this.props.letter.mult}]</span>
+                    <div className="autoConv">
+                        <div className="title">
+                        <span className="auto">AUTOCONV </span>
+                        <span className="mult">[10→{this.props.letter.mult}]</span>
                     </div>
 
                     
@@ -144,15 +148,6 @@ export class LetterBox extends React.Component<LetterBoxProps, undefined> {
 
                     </div>
                     
-
-                    <div className="countDiv">
-                        <span {...ttCount}>{count}</span>
-                        (<span {...ttChange}>{change}</span>)
-                    </div>
-
-
-
-
                 </div>
             )
         }

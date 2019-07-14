@@ -525,6 +525,7 @@ export class GameRoot extends React.Component<undefined, GameRootState> {
                 {letterOptionsDlg}
                 <div className="container">{mainComponent}</div>
                 <ReactTooltip
+                    className="tooltip"  
                     effect={'float'}
                     ref={(tt) => this.tooltip = tt}
                 />
