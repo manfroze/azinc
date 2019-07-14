@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "build": "webpack",
-    "build_release" : "webpack -p --progress --config webpack.release.config.js"
+    "build_release": "webpack -p --progress --config webpack.release.config.js"
   },
   "keywords": [
     "incremental",
@@ -26,6 +26,7 @@
     "@types/react-tooltip": "file:custom-types/react-tooltip",
     "@types/swarm-numberformat": "file:custom-types/swarm-numberformat",
     "decimal.js": "^7.2.1",
+    "material-design-icons": "^3.0.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-modal-dialog": "^4.0.7",

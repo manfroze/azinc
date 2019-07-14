@@ -24,10 +24,7 @@ export class MiniButton extends React.Component<MiniButtonProps, undefined> {
         let style: any = {
             color: textColor
         };
-        if (!this.props.borderless) {
-            let bcolor = this.props.borderColor ? this.props.borderColor : 'black';
-            style.border = `1px solid ${bcolor}`;
-        }
+
         let className = "miniButton";
         if (this.props.disabled) {
             className = "miniButtonDisabled";

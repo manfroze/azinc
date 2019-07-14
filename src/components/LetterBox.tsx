@@ -49,7 +49,7 @@ export class LetterBox extends React.Component<LetterBoxProps, undefined> {
             )
         }
         else {
-            let pauseButtonSym = this.props.letter.paused ? '▶' : '∥';
+            let pauseButtonSym = this.props.letter.paused ? 'play_arrow' : 'pause';
             let fmt = this.props.options.numberFormat;
             let l = this.props.letter;
             let lc = format(l.change, { format: fmt, flavor: 'short' });
@@ -107,28 +107,52 @@ export class LetterBox extends React.Component<LetterBoxProps, undefined> {
 
             return (
                 <div className={"letterBoxDiv" + addStyle} onClick={() => this.props.onClick(this.props.idx)}>
-                    <MiniButton className="topRightCorner" borderless={true} onClick={()=>this.props.onLetterOptionsClick(this.props.idx)}>
-                        <span className="smallText">🔧</span>
+
+                    <MiniButton className="pause" borderless={true} onClick={() => this.props.onPauseClick(this.props.idx)}>
+                            <span className="smallText" {...ttPause}><i className="material-icons">{pauseButtonSym}</i></span>
                     </MiniButton>
+
+                    <MiniButton className="settings" borderless={true} onClick={()=>this.props.onLetterOptionsClick(this.props.idx)}>
+                        <span className="smallText"><i className="material-icons">settings</i></span>
+                    </MiniButton>
+
                     <div className="letterDiv">
                         {this.props.sym}
                     </div>
-                    <MiniButton disabled={!this.props.letter.canUpgrade} onClick={(e) => this.onUpgradeClick(e)} borderColor="blue">
-                        <span {...ttUpgradeOnce}>⇧</span>
+
+                    <div className="autoConv">
+
+                    <div className="title">
+                    <span className="auto">AUTOCONV </span>
+                    <span className="mult">[10→{this.props.letter.mult}]</span>
+                    </div>
+
+                    
+                    <div className="action">
+
+                    <MiniButton className="add" disabled={!this.props.letter.canUpgrade} onClick={(e) => this.onUpgradeClick(e)}>
+                        <span {...ttUpgradeOnce}>+</span>
                     </MiniButton>
-                    <MiniButton disabled={!this.props.letter.canUpgradeMax} onClick={(e) => this.onMaxUpgradeClick(e)} borderColor="darkgreen">
-                        <span {...ttUpgradeMax}>⇮</span>
+
+                    <div className="level"> {this.props.letter.level} </div>
+
+                    <MiniButton className="max" disabled={!this.props.letter.canUpgradeMax} onClick={(e) => this.onMaxUpgradeClick(e)}>
+                        <span {...ttUpgradeMax}>M</span>
                     </MiniButton>
-                    {this.props.letter.level}
+
+                    </div>
+
+                    </div>
+                    
+
                     <div className="countDiv">
                         <span {...ttCount}>{count}</span>
                         (<span {...ttChange}>{change}</span>)
                     </div>
-                    <div className="centerDiv">
-                        <MiniButton className="miniButtonMarginless" borderless={true} onClick={() => this.props.onPauseClick(this.props.idx)}>
-                            <span className="pauseButton" {...ttPause}>{pauseButtonSym}</span>
-                        </MiniButton>
-                    </div>
+
+
+
+
                 </div>
             )
         }
