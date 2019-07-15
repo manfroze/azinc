@@ -152,7 +152,7 @@ td {
 
 .letterBoxDiv {
 
-    min-height: 100%;
+    min-height: 100px;
     max-width: 100%;
     max-height: 100%;
     padding: 5px;
@@ -165,6 +165,8 @@ td {
     border-radius: 15px;
     cursor: pointer;
     box-shadow: 0px 10px;
+    color: #BBB;
+    border-color: #BBB;
 
 }
 
@@ -173,11 +175,8 @@ td {
 .letterBoxDiv.letter-C,
 .letterBoxDiv.letter-D,
 .letterBoxDiv.letter-E {
-
-    
     color: #f54242;
     border-color: #f54242;
-
 }
 
 .letterBoxDiv.letter-F,
@@ -185,11 +184,8 @@ td {
 .letterBoxDiv.letter-H,
 .letterBoxDiv.letter-I,
 .letterBoxDiv.letter-J {
-
-    
     color: #4287f5;
     border-color: #4287f5;
-
 }
 
 .letterBoxDiv.letter-K,
@@ -197,17 +193,33 @@ td {
 .letterBoxDiv.letter-M,
 .letterBoxDiv.letter-N,
 .letterBoxDiv.letter-O {
-
-    
     color: #00d162;
     border-color: #00d162;
+}
 
+.letterBoxDiv.letter-P,
+.letterBoxDiv.letter-Q,
+.letterBoxDiv.letter-R,
+.letterBoxDiv.letter-S,
+.letterBoxDiv.letter-T {
+    color: #f5cb42;
+    border-color: #f5cb42;
+}
+
+.letterBoxDiv.letter-U,
+.letterBoxDiv.letter-V,
+.letterBoxDiv.letter-W,
+.letterBoxDiv.letter-X,
+.letterBoxDiv.letter-Y
+.letterBoxDiv.letter-Z {
+    color: #bc42f5;
+    border-color: #bc42f5;
 }
 
 .letterBoxDiv:hover{
 
- transform: translateY(-5px);
- box-shadow: 0px 15px;
+ //transform: translateY(-5px);
+ //box-shadow: 0px 15px;
 
 }
 
@@ -243,7 +255,6 @@ td {
     border: 1px solid black;
     border-radius: 3px;
     cursor: pointer;
-    /*width:40px;*/
     text-align: center;
     -moz-user-select: none;
     -webkit-user-select: none;
