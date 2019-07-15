@@ -84,8 +84,7 @@ td {
     font-family: 'VT323';
     border-radius: 7px;
     margin:  5px;
-    border:  2px solid #BBB;
-    //box-shadow: 0px 5px #BBB;
+    border:  2px solid #c7c7c7;
 
 }
 
@@ -104,11 +103,25 @@ td {
 
 .autoConv .title {
     font-family: 'VT323';
-    font-size: 12px;
-    color: #fff;
+    font-size: 15px;
+    color: #888;
     border-radius: 5px 5px 0 0;
     padding:  2px 5px;
-    background-color: #BBB;
+    background-color: #c7c7c7;
+}
+
+.autoConv .from {
+    float: left;
+}
+
+.autoConv .mult {
+    float: right;
+}
+
+.autoConv .dots {
+
+    color: #FFF;
+
 }
 
 .autoConv .action {
@@ -117,12 +130,12 @@ td {
 
 .autoConv .add {
     border-radius: 0 0 0 5px;
-    border-right:  2px solid #BBB;
+    border-right:  2px solid #c7c7c7;
 }
 
 .autoConv .max {
     border-radius: 0 0 5px 0;
-    border-left:  2px solid #BBB;
+    border-left:  2px solid #c7c7c7;
 }
 
 .autoConv .level {
@@ -141,9 +154,9 @@ td {
 
 .countDiv .change {
 
-    background-color: #BBB;
-    color: #FFF;
-    padding: 2px;
+    background-color: #c7c7c7;
+    color: #888;
+    padding: 2px 5px;
     margin-left: 5px;
     border-radius: 5px;
     font-size: 15px;
@@ -165,8 +178,8 @@ td {
     border-radius: 15px;
     cursor: pointer;
     box-shadow: 0px 10px;
-    color: #BBB;
-    border-color: #BBB;
+    color: #c7c7c7;
+    border-color: #c7c7c7;
     transition: 0.1s;
 
 }
@@ -328,7 +341,7 @@ td {
 
     padding:  3px 7px;
     border-radius: 100px;
-    border:  2px solid #BBB;
+    border:  2px solid #c7c7c7;
 
 }
 

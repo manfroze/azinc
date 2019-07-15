@@ -65,6 +65,12 @@ export class LetterBox extends React.Component<LetterBoxProps, undefined> {
             let ttCount = {};
             let ttPause = {};
             let ttChange = {};
+
+            let dots = [];
+            for(let x = 0; x < this.props.letter.mult; ++x){
+                dots.push("•");
+            }
+
             if (this.props.options.showTooltips) {
                 let upgradeAmount = 1;
                 if (this.props.altShiftState.shiftDown) {
@@ -101,6 +107,8 @@ export class LetterBox extends React.Component<LetterBoxProps, undefined> {
                     "data-tip": `Generating: ${gen}<br>Spending:${spend}<br>Base change rate: ${this.props.letter.baseChange}`,
                     "data-multiline": true
                 }
+
+                
             }
 
             
@@ -126,9 +134,10 @@ export class LetterBox extends React.Component<LetterBoxProps, undefined> {
                     </div>
 
                     <div className="autoConv">
-                        <div className="title">
-                        <span className="auto">AUTOCONV </span>
-                        <span className="mult">[10→{this.props.letter.mult}]</span>
+                    <div className="title">
+                        <span className="from">10 </span>
+                        <span className="dots">{dots}</span>
+                        <span className="mult"> {this.props.letter.mult}</span>
                     </div>
 
                     
