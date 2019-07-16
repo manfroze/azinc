@@ -143,14 +143,14 @@ export class LetterBox extends React.Component<LetterBoxProps, undefined> {
                     
                     <div className="action">
 
-                    <MiniButton className="add" disabled={!this.props.letter.canUpgrade} onClick={(e) => this.onUpgradeClick(e)}>
-                        <span {...ttUpgradeOnce}>+</span>
+                    <MiniButton className="add smallText" disabled={!this.props.letter.canUpgrade} onClick={(e) => this.onUpgradeClick(e)}>
+                        <span {...ttUpgradeOnce}><i className="material-icons">add</i></span>
                     </MiniButton>
 
                     <div className="level"> {this.props.letter.level} </div>
 
-                    <MiniButton className="max" disabled={!this.props.letter.canUpgradeMax} onClick={(e) => this.onMaxUpgradeClick(e)}>
-                        <span {...ttUpgradeMax}>M</span>
+                    <MiniButton className="max smallText" disabled={!this.props.letter.canUpgradeMax} onClick={(e) => this.onMaxUpgradeClick(e)}>
+                        <span {...ttUpgradeMax}><i className="material-icons">arrow_upward</i></span>
                     </MiniButton>
 
                     </div>
