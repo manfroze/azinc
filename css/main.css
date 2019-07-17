@@ -154,17 +154,21 @@ td {
     color:  #333;
 }
 
-
 .countDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: VT323;
+}
+
+.countDiv .count {
     font-size: 24px;
     color:  #333;
 }
 
 .countDiv .change {
-
-    background-color: #c7c7c7;
-    color: #888;
+    border: 2px solid #c7c7c7;
+    color: #333;
     padding: 2px 5px;
     margin-left: 5px;
     border-radius: 5px;
@@ -173,7 +177,6 @@ td {
 }
 
 .letterBoxDiv {
-
     min-height: 100px;
     max-width: 100%;
     max-height: 100%;
@@ -190,7 +193,6 @@ td {
     color: #c7c7c7;
     border-color: #c7c7c7;
     transition: 0.1s;
-
 }
 
 .letterBoxDiv.letter-A,
@@ -310,7 +312,6 @@ td {
 .miniButton {
     background-color: #FFFFFF;
 }
-
 
 .miniButtonDisabled {
     background-color: #AAAAAA;

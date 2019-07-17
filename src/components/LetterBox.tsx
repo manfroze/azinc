@@ -129,8 +129,8 @@ export class LetterBox extends React.Component<LetterBoxProps, undefined> {
                     </div>
 
                     <div className="countDiv">
-                        <span className="count" {...ttCount}>{count}</span>
-                        <span className="change" {...ttChange}>{change}</span>
+                        <div className="count" {...ttCount}>{count}</div>
+                        <div className="change" {...ttChange}>{change}</div>
                     </div>
 
                     <div className="autoConv">
