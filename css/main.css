@@ -128,7 +128,7 @@ td {
 .autoConv .dots {
     flex-grow: 1;
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     color: #FFF;
     line-height: 1;
 }
@@ -235,7 +235,7 @@ td {
 .letterBoxDiv.letter-V,
 .letterBoxDiv.letter-W,
 .letterBoxDiv.letter-X,
-.letterBoxDiv.letter-Y
+.letterBoxDiv.letter-Y,
 .letterBoxDiv.letter-Z {
     color: #bc42f5;
     border-color: #bc42f5;
