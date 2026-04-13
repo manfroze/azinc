@@ -1,4 +1,11 @@
 
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    height: 100%;
+}
+
 :root {
     --color-bg: #333;
     --color-tile: #EEEEEE;
@@ -26,16 +33,11 @@
 
 }
 
-.cell, .cell:before {
-    height: 100%;
-}
-.cell:before {
-    content: '';
-    margin-right: -0.25em; /* Adjusts for spacing */
-}
-.cell:before, .container {
-    vertical-align: middle;
-    display: inline-block;
+.cell {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container {
@@ -71,7 +73,7 @@ td {
 
 .letterTd{
     width: 160px;
-    height: 1px;
+    height: 150px;
 }
 
 .letterDiv {
@@ -804,8 +806,8 @@ td {
 }
 
 @keyframes vowelSparkle {
-    0%   { box-shadow: 0 0 6px 2px rgba(255, 200, 200, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.3); }
-    100% { box-shadow: 0 0 12px 4px rgba(200, 200, 255, 0.6), inset 0 0 12px rgba(255, 255, 255, 0.5); }
+    0%   { box-shadow: 0px 10px currentColor, 0 0 6px 2px rgba(255, 200, 200, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0px 10px currentColor, 0 0 12px 4px rgba(200, 200, 255, 0.6), inset 0 0 12px rgba(255, 255, 255, 0.5); }
 }
 
 .vowelSynergy .letterDiv,
@@ -1129,4 +1131,134 @@ td {
 .topBarIcon {
     font-size: 24px !important;
     line-height: 1;
+}
+
+/* Responsive: small screens */
+@media (max-width: 768px) {
+    .cell {
+        align-items: flex-start;
+    }
+
+    .container {
+        max-height: none;
+        overflow: visible;
+        width: 100%;
+    }
+
+    table {
+        margin: 10px auto;
+        width: 100%;
+    }
+
+    .letterTd {
+        width: auto;
+        height: 120px;
+        min-width: 0;
+    }
+
+    .letterDiv {
+        font-size: 24px;
+    }
+
+    .letterDivInf {
+        font-size: 30px;
+    }
+
+    .letterBoxDiv {
+        border-radius: 10px;
+    }
+
+    .autoConv .miniButton,
+    .autoConv .miniButtonDisabled {
+        font-size: 16px;
+        padding: 2px 6px;
+    }
+
+    .autoConv .level {
+        font-size: 16px;
+    }
+
+    .topBar {
+        top: 5px;
+        right: 5px;
+        gap: 4px;
+    }
+
+    .topBarButton {
+        width: 34px;
+        height: 34px;
+    }
+
+    .topBarIcon {
+        font-size: 20px !important;
+    }
+
+    .infoBar {
+        top: 5px;
+        left: 5px;
+    }
+
+    .infoPill {
+        font-size: 13px;
+        padding: 3px 6px;
+    }
+
+    .settingsModal {
+        width: 95vw;
+        height: 85vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .letterTd {
+        height: 100px;
+        padding: 2px;
+    }
+
+    .letterDiv {
+        font-size: 18px;
+        margin: 2px;
+    }
+
+    .letterBoxDiv {
+        padding: 3px;
+        border-width: 2px;
+        border-radius: 8px;
+        box-shadow: 0px 6px;
+    }
+
+    .letterBoxDiv:active {
+        box-shadow: 0px 3px;
+        transform: translateY(3px);
+    }
+
+    .countDiv .count {
+        font-size: 18px;
+    }
+
+    .countDiv .change {
+        font-size: 12px;
+        padding: 1px 3px;
+    }
+
+    .autoConv .title {
+        font-size: 12px;
+        padding: 1px 3px;
+    }
+
+    .autoConv .miniButton,
+    .autoConv .miniButtonDisabled {
+        font-size: 14px;
+        padding: 1px 4px;
+    }
+
+    .autoConv .level {
+        font-size: 14px;
+        padding: 1px 4px;
+    }
+
+    .arrowTd {
+        font-size: 14px;
+        padding: 4px;
+    }
 }
