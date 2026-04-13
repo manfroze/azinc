@@ -4,7 +4,7 @@
   "description": "A-Z incremental",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
+    "start": "npx webpack-dev-server --hot --inline --open",
     "build": "webpack",
     "build_release": "webpack -p --progress --config webpack.release.config.js"
   },
@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.1.2",
-    "source-map-loader": "^0.2.1"
+    "source-map-loader": "^0.2.1",
+    "webpack-dev-server": "^2.11.5"
   }
 }
