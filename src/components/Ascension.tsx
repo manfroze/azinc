@@ -1,7 +1,6 @@
 import * as React from "react";
 import { MiniButton } from './MiniButton'
 
-type UpgradeKeys = keyof Upgrades;
 
 export class Upgrades {
     autoGetLast = false;
@@ -44,11 +43,11 @@ const upgradesDesc: Array<{ key: keyof Upgrades, desc: string, isHidden?: boolea
     { key: 'convPurchasePT', desc: 'Pay for auto converter with current letters x10 if possible for letters P-T' },
     { key: 'convPurchaseUZ', desc: 'Pay for auto converter with current letters x10 if possible for letters U-Z' },
 
-    { key: 'autoUpgradeAE', desc: 'Buy auto convertor automatically when possible for letters A-E' },
-    { key: 'autoUpgradeFJ', desc: 'Buy auto convertor automatically when possible for letters F-J' },
-    { key: 'autoUpgradeKO', desc: 'Buy auto convertor automatically when possible for letters K-O' },
-    { key: 'autoUpgradePT', desc: 'Buy auto convertor automatically when possible for letters P-T' },
-    { key: 'autoUpgradeUZ', desc: 'Buy auto convertor automatically when possible for letters U-Z' },
+    { key: 'autoUpgradeAE', desc: 'Buy auto converter automatically when possible for letters A-E' },
+    { key: 'autoUpgradeFJ', desc: 'Buy auto converter automatically when possible for letters F-J' },
+    { key: 'autoUpgradeKO', desc: 'Buy auto converter automatically when possible for letters K-O' },
+    { key: 'autoUpgradePT', desc: 'Buy auto converter automatically when possible for letters P-T' },
+    { key: 'autoUpgradeUZ', desc: 'Buy auto converter automatically when possible for letters U-Z' },
 
     { key: 'globalMult', desc: 'Double conversion rate for all letters', isHidden: true },
 ]

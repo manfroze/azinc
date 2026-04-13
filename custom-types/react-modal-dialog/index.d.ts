@@ -2,6 +2,8 @@ import * as React from 'react';
 
 export interface ModalDialogProperties {
   onClose:()=>void;
+  className?:string;
+  style?:React.CSSProperties;
 }
 
 export interface ModalContainerProperties {

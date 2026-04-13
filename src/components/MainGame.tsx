@@ -25,11 +25,15 @@ interface MainGameProps {
     letterOptions: Array<LetterOptions>;
     options: Options;
     altShiftState : AltShiftState;
+    synergyActive: boolean;
+    synergyMult: number;
     onLetterClick: (idx: number) => void;
     onUpgradeClick: (idx: number, count: number, min: number) => void;
     onPauseClick: (idx: number) => void;
     onAscendClick: () => void;
-    onLetterOptionsClick: (idx:number)=>void;
+    showMaxAll: boolean;
+    onMaxAllClick: () => void;
+    onLetterOptionsChanged: (idx: number, newOptions: LetterOptions) => void;
     onChangeAltShiftState: (altShiftState : AltShiftState)=>void;
 }
 
@@ -81,6 +85,8 @@ for (let i = 0; i < lettersSeq.length; ++i) {
 
 export class MainGame extends React.Component<MainGameProps, undefined> {
 
+    private cachedBounds: {lc: number, minx: number, maxx: number, miny: number, maxy: number} | null = null;
+
     onShiftStateClick(){
         let newAltShiftState = new AltShiftState();
         newAltShiftState.shiftDown = !this.props.altShiftState.shiftDown;
@@ -97,16 +103,20 @@ export class MainGame extends React.Component<MainGameProps, undefined> {
         let rows = [];
 
         let lc = this.props.letters.length;
-        let minx = lettersPos[0], maxx = minx;
-        let miny = lettersPos[0], maxy = miny;
-        for (let i = 0; i < lc; ++i) {
-            let x = lettersPos[i * 2 + 1];
-            let y = lettersPos[i * 2];
-            if (x < minx) minx = x;
-            if (x > maxx) maxx = x;
-            if (y < miny) miny = y;
-            if (y > maxy) maxy = y;
+        if (!this.cachedBounds || this.cachedBounds.lc !== lc) {
+            let minx = lettersPos[0], maxx = minx;
+            let miny = lettersPos[0], maxy = miny;
+            for (let i = 0; i < lc; ++i) {
+                let x = lettersPos[i * 2 + 1];
+                let y = lettersPos[i * 2];
+                if (x < minx) minx = x;
+                if (x > maxx) maxx = x;
+                if (y < miny) miny = y;
+                if (y > maxy) maxy = y;
+            }
+            this.cachedBounds = {lc, minx, maxx, miny, maxy};
         }
+        let {minx, maxx, miny, maxy} = this.cachedBounds;
 
         let rowsCount = maxy - miny + 1;
         let colsCount = maxx - minx + 1;
@@ -138,7 +148,7 @@ export class MainGame extends React.Component<MainGameProps, undefined> {
                                 onUpgradeClick={this.props.onUpgradeClick}
                                 onPauseClick={this.props.onPauseClick}
                                 onAscendClick={this.props.onAscendClick}
-                                onLetterOptionsClick={this.props.onLetterOptionsClick}
+                                onLetterOptionsChanged={this.props.onLetterOptionsChanged}
                             />
                         </td>);
                 }
@@ -196,7 +206,19 @@ export class MainGame extends React.Component<MainGameProps, undefined> {
         }
         return (
             <div>
+                {this.props.synergyActive && (
+                    <div className="synergyBanner">
+                        Vowel Synergy Active! x{this.props.synergyMult.toFixed(1)} generation
+                    </div>
+                )}
                 <table><tbody>{rows}</tbody></table>
+                {this.props.showMaxAll && (
+                    <div className="maxAllContainer">
+                        <MiniButton normalColor="#EEEEEE" onClick={() => this.props.onMaxAllClick()}>
+                            <span className="maxAllText">Max All</span>
+                        </MiniButton>
+                    </div>
+                )}
             </div>
         );
     }
