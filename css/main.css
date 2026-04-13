@@ -1,4 +1,16 @@
 
+:root {
+    --color-bg: #333;
+    --color-tile: #EEEEEE;
+    --color-border: #c7c7c7;
+    --color-mid: #555;
+    --color-group-ae: #f54242;
+    --color-group-fj: #4287f5;
+    --color-group-ko: #00d162;
+    --color-group-pt: #f5cb42;
+    --color-group-uz: #bc42f5;
+}
+
 .root {
     position: absolute;
     left: 0px;
@@ -10,8 +22,8 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    background-color: #333;
-    //box-shadow: inset 0px 0px 60px 20px rgba(0,0,0,0.5);
+    background-color: var(--color-bg);
+
 }
 
 .cell, .cell:before {
@@ -37,7 +49,6 @@ _:-moz-tree-row(hover), .container {
 }   
 
 table, th, td {
-  //border: 1px solid black;
 }
 
 table {
@@ -54,14 +65,13 @@ td {
 
 .arrowTd {
     font-size: 20px;
-    color: #EEEEEE;
+    color: var(--color-tile);
     padding: 10px;
 }
 
 .letterTd{
-    min-width: 150px;
-    min-height: 150px;
-
+    width: 160px;
+    height: 1px;
 }
 
 .letterDiv {
@@ -84,7 +94,7 @@ td {
     font-family: 'VT323';
     border-radius: 7px;
     margin:  5px;
-    border:  2px solid #c7c7c7;
+    border:  2px solid var(--color-border);
 
 }
 
@@ -97,7 +107,7 @@ td {
     display: inline-block;
     cursor: pointer;
     padding: 3px 10px;
-    color: #333;
+    color: var(--color-bg);
 
 }
 
@@ -107,13 +117,13 @@ td {
     color: #888;
     border-radius: 5px 5px 0 0;
     padding:  2px 5px;
-    background-color: #c7c7c7;
+    background-color: var(--color-border);
     min-height: 20px;
     display: flex;
 }
 
 .autoConv .title span {
-    //border: 1px solid #000;
+
     min-width: 20px;
 }
 
@@ -139,19 +149,19 @@ td {
 
 .autoConv .add {
     border-radius: 0 0 0 5px;
-    border-right:  2px solid #c7c7c7;
+    border-right:  2px solid var(--color-border);
 }
 
 .autoConv .max {
     border-radius: 0 0 5px 0;
-    border-left:  2px solid #c7c7c7;
+    border-left:  2px solid var(--color-border);
 }
 
 .autoConv .level {
     font-size: 20px;
     flex-grow: 1;
     padding: 3px 10px;
-    color:  #333;
+    color:  var(--color-bg);
 }
 
 .countDiv {
@@ -163,12 +173,12 @@ td {
 
 .countDiv .count {
     font-size: 24px;
-    color:  #333;
+    color:  var(--color-bg);
 }
 
 .countDiv .change {
-    border: 2px solid #c7c7c7;
-    color: #333;
+    border: 2px solid var(--color-border);
+    color: var(--color-bg);
     padding: 2px 5px;
     margin-left: 5px;
     border-radius: 5px;
@@ -176,22 +186,78 @@ td {
 
 }
 
-.letterBoxDiv {
-    min-height: 100px;
-    max-width: 100%;
-    max-height: 100%;
-    padding: 5px;
-    background-color: #EEEEEE;
-    border-radius: 10px;
+/* Tile flip */
+
+.tileFlipContainer {
     position: relative;
-    color:  #333;
+    height: 100%;
+}
+
+.tileFlipContainer .tileFront {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.tileFlipContainer .tileBack {
+    display: none;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.tileFlipContainer.flipped .tileFront {
+    display: none;
+}
+
+.tileFlipContainer.flipped .tileBack {
+    display: block;
+    animation: flipIn 0.3s ease;
+}
+
+.tileFlipContainer.unflipped .tileFront {
+    animation: flipIn 0.3s ease;
+}
+
+@keyframes flipIn {
+    0%   { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+}
+
+
+.tileSettings {
+    font-family: 'VT323';
+    padding: 5px;
+    text-align: left;
+}
+
+.tileSettingsRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.tileSettingsLabel {
+    font-size: 16px;
+}
+
+.letterBoxDiv {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: var(--color-tile);
+    border-radius: 15px;
+    position: relative;
+    color: var(--color-bg);
     border-width: 3px;
     border-style: solid;
-    border-radius: 15px;
+    border-color: var(--color-border);
     cursor: pointer;
     box-shadow: 0px 10px;
-    color: #c7c7c7;
-    border-color: #c7c7c7;
+    color: var(--color-border);
     transition: 0.1s;
 }
 
@@ -200,8 +266,8 @@ td {
 .letterBoxDiv.letter-C,
 .letterBoxDiv.letter-D,
 .letterBoxDiv.letter-E {
-    color: #f54242;
-    border-color: #f54242;
+    color: var(--color-group-ae);
+    border-color: var(--color-group-ae);
 }
 
 .letterBoxDiv.letter-F,
@@ -209,8 +275,8 @@ td {
 .letterBoxDiv.letter-H,
 .letterBoxDiv.letter-I,
 .letterBoxDiv.letter-J {
-    color: #4287f5;
-    border-color: #4287f5;
+    color: var(--color-group-fj);
+    border-color: var(--color-group-fj);
 }
 
 .letterBoxDiv.letter-K,
@@ -218,8 +284,8 @@ td {
 .letterBoxDiv.letter-M,
 .letterBoxDiv.letter-N,
 .letterBoxDiv.letter-O {
-    color: #00d162;
-    border-color: #00d162;
+    color: var(--color-group-ko);
+    border-color: var(--color-group-ko);
 }
 
 .letterBoxDiv.letter-P,
@@ -227,8 +293,8 @@ td {
 .letterBoxDiv.letter-R,
 .letterBoxDiv.letter-S,
 .letterBoxDiv.letter-T {
-    color: #f5cb42;
-    border-color: #f5cb42;
+    color: var(--color-group-pt);
+    border-color: var(--color-group-pt);
 }
 
 .letterBoxDiv.letter-U,
@@ -237,15 +303,8 @@ td {
 .letterBoxDiv.letter-X,
 .letterBoxDiv.letter-Y,
 .letterBoxDiv.letter-Z {
-    color: #bc42f5;
-    border-color: #bc42f5;
-}
-
-.letterBoxDiv:hover{
-
- //transform: translateY(-5px);
- //box-shadow: 0px 15px;
-
+    color: var(--color-group-uz);
+    border-color: var(--color-group-uz);
 }
 
 
@@ -277,26 +336,240 @@ td {
     font-size: 32px;
     margin-right: 10px;
     margin-top: 10px;
-    border: 1px solid black;
-    border-radius: 3px;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    padding: 4px 10px;
     cursor: pointer;
     text-align: center;
+    color: var(--color-tile);
+    background-color: var(--color-mid);
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
+.optionsButton:hover {
+    background-color: #666;
+}
+
+/* Settings overlay & modal */
+
+.settingsOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settingsModal {
+    background: #444;
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    width: 480px;
+    max-width: 95vw;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Settings panels */
+
+.settingsPanel {
+    font-family: 'VT323';
+    color: var(--color-tile);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+}
+
+.settingsHeader {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--color-border);
+    background: var(--color-mid);
+    border-radius: 10px 10px 0 0;
+    flex-shrink: 0;
+}
+
+.settingsTabs {
+    display: flex;
+    flex: 1;
+    gap: 0;
+}
+
+.settingsTab {
+    font-family: 'VT323';
+    font-size: 16px;
+    background: transparent;
+    color: #aaa;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.settingsTab:hover {
+    color: var(--color-tile);
+}
+
+.settingsTabActive {
+    color: var(--color-tile);
+    border-bottom-color: var(--color-group-fj);
+}
+
+.settingsCloseBtn {
+    font-family: 'VT323';
+    font-size: 20px;
+    background: transparent;
+    color: #aaa;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.settingsCloseBtn:hover {
+    color: var(--color-tile);
+}
+
+.settingsBody {
+    padding: 10px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+}
+
+.settingsRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 4px;
+    border-bottom: 1px solid rgba(199, 199, 199, 0.15);
+}
+
+.settingsRow:last-child {
+    border-bottom: none;
+}
+
+.settingsRowLabel {
+    font-size: 18px;
+    color: var(--color-tile);
+}
+
+.settingsSelect {
+    font-family: 'VT323';
+    font-size: 16px;
+    background-color: var(--color-mid);
+    color: var(--color-tile);
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.settingsSelect option {
+    background-color: var(--color-mid);
+    color: var(--color-tile);
+}
+
+.settingsCheckbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--color-group-fj);
+}
+
+.settingsActions {
+    margin: 10px 20px;
+}
+
+.settingsActionsRow {
+    display: flex;
+    gap: 12px;
+}
+
+.resetButtonGroup {
+    flex: 1;
+}
+
+/* Hover explain tooltip — fixed position to escape overflow */
+.hoverExplainText {
+    position: fixed;
+    transform: translate(-50%, -100%);
+    font-family: 'VT323';
+    font-size: 14px;
+    color: var(--color-tile);
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    padding: 5px 10px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+.settingsConfirm {
+    margin-top: 8px;
+}
+
 .hardResetButton {
-    background: red;
-    margin-top: 20px;
-    margin-right: 20px;
+    font-family: 'VT323';
+    font-size: 16px;
+    background: var(--color-group-ae);
+    color: var(--color-tile);
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    padding: 6px 14px;
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.hardResetButton:hover {
+    background: #d63030;
 }
 
 .softResetButton {
-    background: #FF7777;
-    margin-top: 20px;
-    margin-right: 20px;
+    font-family: 'VT323';
+    font-size: 16px;
+    background: var(--color-group-pt);
+    color: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    padding: 6px 14px;
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.softResetButton:hover {
+    background: #d4b035;
+}
+
+.nevermindButton {
+    font-family: 'VT323';
+    font-size: 16px;
+    background: var(--color-mid);
+    color: var(--color-tile);
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    padding: 6px 14px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.nevermindButton:hover {
+    background: #666;
 }
 
 
@@ -352,17 +625,385 @@ td {
 
     padding:  3px 7px;
     border-radius: 100px;
-    border:  2px solid #c7c7c7;
+    border:  2px solid var(--color-border);
 
 }
 
-.tooltip {
 
-    font-family: 'VT323';
-    font-size: 16px !important;
+.ttPill {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 4px;
+    padding: 3px 6px;
+    margin: 0 2px;
+    font-weight: bold;
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+    vertical-align: middle;
+}
 
+.ttHint {
+    opacity: 0.6;
+    font-size: 13px;
 }
 
 .altShiftStateDiv {
-    height: 30px;
+    height: 36px;
+    margin: 4px 0;
+}
+
+.altShiftStateDiv .miniButton,
+.altShiftStateDiv .miniButtonDisabled {
+    font-family: 'VT323';
+    font-size: 18px;
+    padding: 5px 14px;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    color: var(--color-tile);
+    background-color: var(--color-mid);
+    cursor: pointer;
+}
+
+.altShiftStateDiv .miniButton:hover {
+    background-color: #666;
+}
+
+/* === NEW FEATURES CSS === */
+
+/* Feature #8: Progress bar on letter tiles */
+.progressBarBg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.progressBarFill {
+    height: 100%;
+    background-color: currentColor;
+    opacity: 0.5;
+    transition: width 0.3s ease;
+    border-radius: 0 0 0 12px;
+}
+
+/* Feature #9: Level-up animation */
+@keyframes levelUpPulse {
+    0%   { box-shadow: 0px 10px, 0 0 0 0 currentColor; }
+    50%  { box-shadow: 0px 10px, 0 0 12px 4px currentColor; }
+    100% { box-shadow: 0px 10px, 0 0 0 0 currentColor; }
+}
+
+.levelUpAnim {
+    animation: levelUpPulse 0.6s ease;
+}
+
+/* New letter unlock animation */
+@keyframes newLetterAppear {
+    0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+    60%  { transform: scale(1.1) rotate(2deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.tileFlipContainer {
+    animation: newLetterAppear 0.4s ease;
+}
+
+/* Feature #4: Synergy banner */
+.synergyBanner {
+    font-family: 'VT323';
+    font-size: 18px;
+    color: #fff;
+    background: linear-gradient(90deg, var(--color-group-ae), var(--color-group-fj), var(--color-group-ko), var(--color-group-pt), var(--color-group-uz));
+    padding: 6px 16px;
+    margin: 0 20px 5px 20px;
+    border-radius: 8px;
+    text-align: center;
+    animation: synergyGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes synergyGlow {
+    0%   { opacity: 0.85; }
+    100% { opacity: 1; }
+}
+
+/* Feature #11: Max All button */
+.maxAllContainer {
+    text-align: center;
+    margin: 10px 20px;
+}
+
+.maxAllContainer .miniButton {
+    font-family: 'VT323';
+    font-size: 18px;
+    padding: 8px 24px;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    color: var(--color-tile);
+    background-color: var(--color-mid);
+    cursor: pointer;
+}
+
+.maxAllContainer .miniButton:hover {
+    background-color: #666;
+}
+
+.maxAllText {
+    font-size: 18px;
+    color: var(--color-tile);
+}
+
+/* Stats/sub-panel tables */
+.statsTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 4px;
+    margin: 0;
+}
+
+.statsLabel {
+    text-align: left;
+    font-size: 16px;
+    color: var(--color-tile);
+    padding: 4px 10px 4px 0;
+}
+
+.statsValue {
+    text-align: right;
+    font-size: 16px;
+    color: #EEE;
+    padding: 4px 0;
+}
+
+/* Notification toast */
+.notificationToast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'VT323';
+    font-size: 18px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.85);
+    border: 2px solid var(--color-group-pt);
+    border-radius: 8px;
+    padding: 10px 24px;
+    z-index: 10000;
+    animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s;
+    pointer-events: none;
+}
+
+@keyframes toastIn {
+    0%   { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes toastOut {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Challenge banner */
+.challengeBanner {
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    font-family: 'VT323';
+    font-size: 16px;
+    color: var(--color-group-pt);
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid var(--color-group-pt);
+    border-radius: 8px;
+    padding: 6px 14px;
+    z-index: 100;
+}
+
+.challengeActive {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    background: rgba(245, 66, 66, 0.15);
+    border: 1px solid var(--color-group-ae);
+    border-radius: 5px;
+}
+
+/* Info bar (prestige/NG+ indicators) */
+.infoBar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+}
+
+.infoPill {
+    font-family: 'VT323';
+    font-size: 15px;
+    color: var(--color-tile);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 4px 10px;
+}
+
+.navButton {
+    font-family: 'VT323';
+    font-size: 16px;
+    background: var(--color-mid);
+    color: var(--color-tile);
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    padding: 6px 14px;
+    cursor: pointer;
+}
+
+.navButton:hover {
+    background: #666;
+}
+
+/* Settings sections */
+.settingsSection {
+    margin: 15px 20px;
+    padding: 10px;
+    border: 1px solid rgba(199, 199, 199, 0.3);
+    border-radius: 8px;
+}
+
+.settingsSectionTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--color-tile);
+}
+
+/* Prestige button */
+.prestigeButton {
+    font-family: 'VT323';
+    font-size: 16px;
+    background: linear-gradient(135deg, var(--color-group-uz), var(--color-group-fj));
+    color: #fff;
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    padding: 6px 14px;
+    margin-top: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.prestigeButton:hover {
+    opacity: 0.85;
+}
+
+/* Save import/export textarea */
+.saveTextarea {
+    font-family: 'VT323';
+    font-size: 14px;
+    width: 100%;
+    min-height: 60px;
+    max-height: 100px;
+    background: #333;
+    color: var(--color-tile);
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    padding: 6px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+/* Achievements table */
+.achievementsTable {
+    width: 100%;
+}
+
+.achievementEarned td {
+    color: var(--color-tile);
+}
+
+.achievementLocked td {
+    color: #888;
+}
+
+.achievementIcon {
+    font-size: 20px;
+    width: 30px;
+    color: var(--color-group-pt);
+}
+
+/* Transcend panel */
+.transcendPanel {
+    font-family: 'VT323';
+    color: var(--color-tile);
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.transcendTitle {
+    font-family: 'Press Start 2P';
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: var(--color-group-pt);
+}
+
+.transcendStars {
+    font-size: 36px;
+    color: var(--color-group-pt);
+    margin-bottom: 10px;
+    letter-spacing: 8px;
+}
+
+.transcendText {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.transcendHint {
+    font-size: 14px;
+    color: #999;
+    margin-top: 10px;
+}
+/* Top bar buttons */
+.topBar {
+    position: absolute;
+    top: 10px;
+    right: 60px;
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+}
+
+.topBarButton {
+    font-size: 22px;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    padding: 4px 10px;
+    cursor: pointer;
+    text-align: center;
+    color: var(--color-tile) !important;
+    background-color: var(--color-mid);
+}
+
+.topBarButton:hover {
+    background-color: #666;
+}
+
+.topBarIcon {
+    font-size: 22px;
+}
+
+.topBarIcon {
+    font-size: 24px !important;
+    vertical-align: middle;
+}
+
+.optionsButton .material-icons {
+    font-size: 28px;
+    vertical-align: middle;
 }
