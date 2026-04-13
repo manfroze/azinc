@@ -18,6 +18,7 @@ interface LetterBoxProps {
     altShiftState: AltShiftState;
 
     ascend?: boolean;
+    synergyActive?: boolean;
 
     options: Options;
 
@@ -58,7 +59,7 @@ export class LetterBox extends React.Component<LetterBoxProps, LetterBoxState> {
                     <div className="letterDivInf">{this.props.sym}</div>
                     {
                         this.props.ascend &&
-                        <MiniButton borderColor="red" onClick={this.props.onAscendClick}>
+                        <MiniButton className="ascendButton" normalColor="#EEEEEE" onClick={this.props.onAscendClick}>
                             <span className="smallText">Ascend</span>
                         </MiniButton>
                     }
@@ -77,6 +78,8 @@ export class LetterBox extends React.Component<LetterBoxProps, LetterBoxState> {
             let countRaw = this.props.letter.count.toString();
             let addStyle = this.props.letter.paused ? " letterBoxDivPaused" : "";
             let animClass = this.state.levelUpAnim ? " levelUpAnim" : "";
+            let vowels = ['A','E','I','O','U'];
+            let synergyClass = (this.props.synergyActive && vowels.indexOf(this.props.sym) >= 0) ? " vowelSynergy" : "";
 
             // Progress bar: how close to next 10-unit threshold
             let progressPct = Math.min(100, Math.max(0, (this.props.letter.count % 10) / 10 * 100));
@@ -137,7 +140,7 @@ export class LetterBox extends React.Component<LetterBoxProps, LetterBoxState> {
 
             return (
                 <div className={"tileFlipContainer" + (this.state.flipped ? " flipped" : this.state.hasFlipped ? " unflipped" : "")}>
-                <div className={"letterBoxDiv tileFront letter-" + this.props.sym + addStyle + animClass} onClick={() => this.props.onClick(this.props.idx)}>
+                <div className={"letterBoxDiv tileFront letter-" + this.props.sym + addStyle + animClass + synergyClass} onClick={() => this.props.onClick(this.props.idx)}>
 
                     {/* Progress bar */}
                     <div className="progressBarBg">

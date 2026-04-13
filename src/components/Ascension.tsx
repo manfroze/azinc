@@ -93,13 +93,15 @@ export class AscensionComponent extends React.Component<AscensionProps, any> {
         }
 
         return (
-            <table>
-                <tbody>
-                    {
-                        table
-                    }
-                </tbody>
-            </table>
+            <div className="ascensionPanel">
+                <div className="ascensionTitle">Ascension</div>
+                <div className="ascensionSubtitle">Choose an upgrade to carry into your next run</div>
+                <table className="ascensionTable">
+                    <tbody>
+                        {table}
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }

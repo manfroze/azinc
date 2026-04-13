@@ -329,29 +329,7 @@ td {
 
 
 
-.optionsButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 32px;
-    margin-right: 10px;
-    margin-top: 10px;
-    border: 2px solid var(--color-border);
-    border-radius: 8px;
-    padding: 4px 10px;
-    cursor: pointer;
-    text-align: center;
-    color: var(--color-tile);
-    background-color: var(--color-mid);
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.optionsButton:hover {
-    background-color: #666;
-}
+/* optionsButton kept for backwards compat but no longer used standalone */
 
 /* Settings overlay & modal */
 
@@ -575,6 +553,64 @@ td {
 
 .upgradeDescTd {
     text-align: left;
+    font-family: 'VT323';
+    font-size: 18px;
+    color: var(--color-tile);
+    padding: 6px 12px;
+}
+
+/* Ascension panel */
+.ascensionPanel {
+    font-family: 'VT323';
+    color: var(--color-tile);
+    text-align: center;
+    padding: 20px;
+}
+
+.ascensionTitle {
+    font-family: 'Press Start 2P';
+    font-size: 24px;
+    color: var(--color-group-pt);
+    margin-bottom: 8px;
+}
+
+.ascensionSubtitle {
+    font-size: 18px;
+    color: #999;
+    margin-bottom: 20px;
+}
+
+.ascensionTable {
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0 6px;
+}
+
+.ascensionTable td {
+    padding: 6px 10px;
+}
+
+.ascensionTable tr {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+}
+
+/* Ascend button on infinity tile */
+.ascendButton {
+    font-family: 'VT323';
+    font-size: 16px;
+    background: var(--color-group-pt) !important;
+    color: var(--color-bg) !important;
+    border: 2px solid var(--color-group-pt);
+    border-radius: 6px;
+    padding: 4px 12px;
+    margin-top: 6px;
+    animation: ascendPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes ascendPulse {
+    from { box-shadow: 0 0 4px var(--color-group-pt); }
+    to { box-shadow: 0 0 12px var(--color-group-pt); }
 }
 
 
@@ -596,7 +632,13 @@ td {
 }
 
 .ownedText {
-    background: lightgray;
+    font-family: 'VT323';
+    font-size: 16px;
+    color: var(--color-group-ko);
+    background: rgba(0, 209, 98, 0.15);
+    border: 1px solid var(--color-group-ko);
+    border-radius: 4px;
+    padding: 2px 8px;
 }
 
 .centerTd {
@@ -715,15 +757,21 @@ td {
 }
 
 /* Feature #4: Synergy banner */
+.synergyBannerCell {
+    padding: 0;
+}
+.synergyBannerCell .synergyBanner {
+    margin: 0 24px;
+}
 .synergyBanner {
     font-family: 'VT323';
-    font-size: 18px;
+    font-size: 16px;
     color: #fff;
     background: linear-gradient(90deg, var(--color-group-ae), var(--color-group-fj), var(--color-group-ko), var(--color-group-pt), var(--color-group-uz));
-    padding: 6px 16px;
-    margin: 0 20px 5px 20px;
+    padding: 6px 8px;
     border-radius: 8px;
     text-align: center;
+    white-space: nowrap;
     animation: synergyGlow 2s ease-in-out infinite alternate;
 }
 
@@ -732,24 +780,78 @@ td {
     100% { opacity: 1; }
 }
 
-/* Feature #11: Max All button */
-.maxAllContainer {
-    text-align: center;
-    margin: 10px 20px;
+/* Vowel sparkly rainbow when synergy active */
+.vowelSynergy {
+    background: linear-gradient(
+        135deg,
+        hsl(0, 100%, 87%) 0%,
+        hsl(40, 100%, 87%) 15%,
+        hsl(60, 100%, 87%) 25%,
+        hsl(120, 80%, 85%) 40%,
+        hsl(200, 100%, 87%) 55%,
+        hsl(270, 100%, 90%) 70%,
+        hsl(320, 100%, 87%) 85%,
+        hsl(0, 100%, 87%) 100%
+    ) !important;
+    background-size: 300% 300% !important;
+    animation: vowelRainbow 3s ease infinite, vowelSparkle 1.5s ease-in-out infinite alternate !important;
 }
 
-.maxAllContainer .miniButton {
+@keyframes vowelRainbow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes vowelSparkle {
+    0%   { box-shadow: 0 0 6px 2px rgba(255, 200, 200, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 12px 4px rgba(200, 200, 255, 0.6), inset 0 0 12px rgba(255, 255, 255, 0.5); }
+}
+
+.vowelSynergy .letterDiv,
+.vowelSynergy .count,
+.vowelSynergy .change {
+    background: linear-gradient(
+        90deg,
+        hsl(0, 80%, 40%),
+        hsl(40, 80%, 38%),
+        hsl(120, 60%, 35%),
+        hsl(200, 80%, 40%),
+        hsl(270, 70%, 42%),
+        hsl(330, 80%, 40%)
+    );
+    background-size: 300% 100%;
+    animation: vowelTextRainbow 3s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@keyframes vowelTextRainbow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Feature #11: Max All button */
+.maxAllInGrid {
+    margin-top: 6px;
+    text-align: center;
+}
+
+.maxAllButton {
     font-family: 'VT323';
     font-size: 18px;
-    padding: 8px 24px;
+    padding: 8px 16px;
     border: 2px solid var(--color-border);
     border-radius: 8px;
     color: var(--color-tile);
     background-color: var(--color-mid);
     cursor: pointer;
+    white-space: nowrap;
 }
 
-.maxAllContainer .miniButton:hover {
+.maxAllButton:hover {
     background-color: #666;
 }
 
@@ -809,6 +911,29 @@ td {
 }
 
 /* Challenge banner */
+.debugBanner {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'VT323';
+    font-size: 20px;
+    color: #ff0;
+    background: rgba(255, 0, 0, 0.85);
+    border: 2px solid #ff0;
+    border-radius: 8px;
+    padding: 8px 20px;
+    z-index: 9999;
+    cursor: pointer;
+    animation: debugPulse 0.5s ease-in-out infinite alternate;
+    letter-spacing: 2px;
+}
+
+@keyframes debugPulse {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}
+
 .challengeBanner {
     position: fixed;
     top: 60px;
@@ -973,21 +1098,28 @@ td {
 .topBar {
     position: absolute;
     top: 10px;
-    right: 60px;
+    right: 10px;
     display: flex;
     gap: 8px;
     z-index: 100;
+    align-items: center;
 }
 
 .topBarButton {
-    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
     border: 2px solid var(--color-border);
     border-radius: 8px;
-    padding: 4px 10px;
     cursor: pointer;
-    text-align: center;
     color: var(--color-tile) !important;
     background-color: var(--color-mid);
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .topBarButton:hover {
@@ -995,15 +1127,6 @@ td {
 }
 
 .topBarIcon {
-    font-size: 22px;
-}
-
-.topBarIcon {
     font-size: 24px !important;
-    vertical-align: middle;
-}
-
-.optionsButton .material-icons {
-    font-size: 28px;
-    vertical-align: middle;
+    line-height: 1;
 }

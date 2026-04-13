@@ -126,6 +126,10 @@ export class MainGame extends React.Component<MainGameProps, undefined> {
         for (let y = 0; y < rowsCount; ++y) {
             let cols = [];
             for (let x = 0; x < colsCount; ++x) {
+                // Skip empty cells between K and E when synergy banner occupies them
+                if (this.props.synergyActive && miny + y == 1 && minx + x >= 1 && minx + x <= 3) {
+                    continue;
+                }
                 let sym = ' ';
                 let lInfo = lettersArr[miny + y][minx + x];
                 if (lInfo && lInfo.idx < lc) {
@@ -143,6 +147,7 @@ export class MainGame extends React.Component<MainGameProps, undefined> {
                                 letterOptions={lo}
                                 options={this.props.options}
                                 ascend={allowAscension}
+                                synergyActive={this.props.synergyActive}
                                 altShiftState={this.props.altShiftState}
                                 onClick={this.props.onLetterClick}
                                 onUpgradeClick={this.props.onUpgradeClick}
@@ -153,14 +158,23 @@ export class MainGame extends React.Component<MainGameProps, undefined> {
                         </td>);
                 }
                 else {
-                    if (this.props.options.showAltShiftIndicator && minx + x == 3 && miny + y == 2) {
+                    if (minx + x == 3 && miny + y == 2) {
                         cols.push(<td key={x + ' ' + y}>
-                            <div className="altShiftStateDiv">
-                                <MiniButton borderless={!this.props.altShiftState.shiftDown} onClick={() => this.onShiftStateClick()}>Shift</MiniButton>
-                            </div>
-                            <div className="altShiftStateDiv">
-                                <MiniButton borderless={!this.props.altShiftState.altDown} onClick={() => this.onAltStateClick()}>Alt</MiniButton>
-                            </div>
+                            {this.props.options.showAltShiftIndicator && <div>
+                                <div className="altShiftStateDiv">
+                                    <MiniButton borderless={!this.props.altShiftState.shiftDown} onClick={() => this.onShiftStateClick()}>Shift</MiniButton>
+                                </div>
+                                <div className="altShiftStateDiv">
+                                    <MiniButton borderless={!this.props.altShiftState.altDown} onClick={() => this.onAltStateClick()}>Alt</MiniButton>
+                                </div>
+                            </div>}
+                            {this.props.showMaxAll && (
+                                <div className="maxAllInGrid">
+                                    <MiniButton className="maxAllButton" normalColor="#EEEEEE" onClick={() => this.props.onMaxAllClick()}>
+                                        <span className="maxAllText">Max All</span>
+                                    </MiniButton>
+                                </div>
+                            )}
                         </td>);
                     }
                     else {
@@ -168,17 +182,27 @@ export class MainGame extends React.Component<MainGameProps, undefined> {
                     }
                 }
                 if (x != colsCount - 1) {
-                    let nxlInfo = lettersArr[miny + y][minx + x + 1];
-                    if (lInfo && nxlInfo && nxlInfo.idx < lc && lInfo.idx < lc) {
-                        if (lInfo.idx + 1 == nxlInfo.idx) {
-                            cols.push(<td key={x + ' a ' + y} className="arrowTd">▶</td>);
-                        }
-                        else {
-                            cols.push(<td key={x + ' a ' + y} className="arrowTd">◀</td>);
-                        }
+                    // Insert synergy banner after K, spanning to E
+                    if (this.props.synergyActive && miny + y == 1 && minx + x == 0) {
+                        cols.push(<td key={'synergy'} colSpan={7} className="synergyBannerCell">
+                            <div className="synergyBanner">
+                                Vowel Synergy Active! x{this.props.synergyMult.toFixed(1)} generation
+                            </div>
+                        </td>);
                     }
                     else {
-                        cols.push(<td key={x + ' s ' + y}></td>);
+                        let nxlInfo = lettersArr[miny + y][minx + x + 1];
+                        if (lInfo && nxlInfo && nxlInfo.idx < lc && lInfo.idx < lc) {
+                            if (lInfo.idx + 1 == nxlInfo.idx) {
+                                cols.push(<td key={x + ' a ' + y} className="arrowTd">▶</td>);
+                            }
+                            else {
+                                cols.push(<td key={x + ' a ' + y} className="arrowTd">◀</td>);
+                            }
+                        }
+                        else {
+                            cols.push(<td key={x + ' s ' + y}></td>);
+                        }
                     }
                 }
             }
@@ -206,19 +230,7 @@ export class MainGame extends React.Component<MainGameProps, undefined> {
         }
         return (
             <div>
-                {this.props.synergyActive && (
-                    <div className="synergyBanner">
-                        Vowel Synergy Active! x{this.props.synergyMult.toFixed(1)} generation
-                    </div>
-                )}
                 <table><tbody>{rows}</tbody></table>
-                {this.props.showMaxAll && (
-                    <div className="maxAllContainer">
-                        <MiniButton normalColor="#EEEEEE" onClick={() => this.props.onMaxAllClick()}>
-                            <span className="maxAllText">Max All</span>
-                        </MiniButton>
-                    </div>
-                )}
             </div>
         );
     }
