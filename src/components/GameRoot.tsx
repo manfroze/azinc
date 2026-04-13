@@ -1,3 +1,4 @@
+declare var process: { env: { NODE_ENV: string } };
 import * as React from "react";
 import { ModalDialog, ModalContainer } from 'react-modal-dialog';
 import { Options, OptionsComponent } from './Options';
@@ -51,6 +52,8 @@ interface GameRootState {
     // Notification
     notification: string;
     notificationKey: number;
+    // Debug
+    debugAutoPlay: boolean;
 }
 
 function getKeys<T>(obj: T): (keyof T)[] {
@@ -92,6 +95,7 @@ const lettersSeq = '\u221EABCDEFGHIJKLMNOPQRSTUVWXYZ';
 export class GameRoot extends React.Component<undefined, GameRootState> {
 
     timerId: number;
+    debugTimerId: number;
     lastUpdate: number;
     lastSave: number;
 
@@ -124,7 +128,8 @@ export class GameRoot extends React.Component<undefined, GameRootState> {
             showChallenges: false,
             showPrestige: false,
             notification: '',
-            notificationKey: 0
+            notificationKey: 0,
+            debugAutoPlay: false
         };
         this.timerId = setInterval(() => this.onTimer(), 1000);
         this.lastUpdate = performance.now();
@@ -198,6 +203,52 @@ export class GameRoot extends React.Component<undefined, GameRootState> {
 
     onBlurOrFocus() {
         this.onChangeAltShiftState(new AltShiftState());
+    }
+
+    // --- Debug Auto-Play ---
+    toggleDebugAutoPlay() {
+        if (this.state.debugAutoPlay) {
+            clearInterval(this.debugTimerId);
+            this.setState({ debugAutoPlay: false });
+        } else {
+            this.debugTimerId = setInterval(() => this.debugAutoPlayTick(), 500) as any;
+            this.setState({ debugAutoPlay: true });
+        }
+    }
+
+    debugAutoPlayTick() {
+        // Stop at ascension/transcend screens — let the player decide
+        if (this.state.ascension) return;
+
+        let showTranscendScreen = this.state.stage > 1 &&
+            this.state.letters.length >= maxLettersCount &&
+            this.state.letters[this.state.letters.length - 1].count >= 10;
+        if (showTranscendScreen) return;
+
+        // Normal gameplay: pump counts and unlock one letter per tick
+        let letters = this.state.letters.slice();
+
+        // Bootstrap: if only infinity exists, create letter A
+        if (letters.length <= 1) {
+            letters.push(new LetterRecord());
+        }
+
+        // Give all existing letters huge counts and levels
+        for (let i = 1; i < letters.length; i++) {
+            letters[i].count += 1e6;
+            letters[i].level += 100;
+        }
+
+        // Unlock one new letter per tick so progress is visible
+        if (letters.length < maxLettersCount) {
+            letters.push(new LetterRecord());
+            let i = letters.length - 1;
+            letters[i].count = 1e6;
+            letters[i].level = 100;
+        }
+
+        this.updateChange(letters);
+        this.setState({ letters });
     }
 
     updateMultipliers(u: Upgrades) {
@@ -343,6 +394,7 @@ export class GameRoot extends React.Component<undefined, GameRootState> {
                 parsedData.showChallenges = false;
                 parsedData.showPrestige = false;
                 parsedData.notification = '';
+                parsedData.debugAutoPlay = false;
 
                 // Feature #6: Offline progress
                 let lastSave = parsedData.lastSaveTime || Date.now();
@@ -1022,22 +1074,28 @@ export class GameRoot extends React.Component<undefined, GameRootState> {
         // Unlock conditions
         let hasAnyUpgrade = this.state.upgrades && getKeys(this.state.upgrades).some(k => this.state.upgrades[k]);
         let showChallengesButton = hasAnyUpgrade;
-        let hasReachedZ = this.state.letters.length >= maxLettersCount;
-        let showPrestigeButton = hasReachedZ || (this.state.prestigeLevel || 0) > 0;
+        let allUpgradesOwned = this.state.upgrades && getKeys(this.state.upgrades).every(k => this.state.upgrades[k]);
+        let showPrestigeButton = allUpgradesOwned || (this.state.prestigeLevel || 0) > 0;
 
         return (
             <div className="cell">
                 <div className="topBar">
+                    {process.env.NODE_ENV !== 'production' && <MiniButton className="topBarButton" normalColor={this.state.debugAutoPlay ? "#ff4444" : "#EEEEEE"} onClick={() => this.toggleDebugAutoPlay()}>
+                        <i className="material-icons topBarIcon">{this.state.debugAutoPlay ? 'stop' : 'fast_forward'}</i>
+                    </MiniButton>}
                     {showPrestigeButton && <MiniButton className="topBarButton" normalColor="#EEEEEE" onClick={() => this.setState({ showPrestige: true })}>
                         <i className="material-icons topBarIcon">auto_awesome</i>
                     </MiniButton>}
                     {showChallengesButton && <MiniButton className="topBarButton" normalColor="#EEEEEE" onClick={() => this.setState({ showChallenges: true })}>
                         <i className="material-icons topBarIcon">flag</i>
                     </MiniButton>}
+                    <MiniButton className="topBarButton" normalColor="#EEEEEE" onClick={() => this.onOptionsClick()}>
+                        <i className="material-icons topBarIcon">settings</i>
+                    </MiniButton>
                 </div>
-                <MiniButton className="optionsButton" onClick={() => this.onOptionsClick()}>
-                    <i className="material-icons">settings</i>
-                </MiniButton>
+                {this.state.debugAutoPlay && (
+                    <div className="debugBanner">DEBUG AUTO-PLAY</div>
+                )}
                 {infoBar}
                 {challengeBanner}
                 {notificationToast}
